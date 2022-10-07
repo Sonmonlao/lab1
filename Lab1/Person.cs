@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace MethLab1
 {
-    class Person
+    class Person : IEquatable<Person>
     {
-        private string firstName;
-        private string lastname;
-        private System.DateTime dateBirth;
+        protected string firstName;
+        protected string lastname;
+        protected System.DateTime dateBirth;
 
         public string FirstName { get { return firstName; } set { firstName = value; } }
         public string LastName { get { return lastname; } set { lastname = value; } }
@@ -30,7 +31,7 @@ namespace MethLab1
             lastname = "Doe";
             dateBirth = System.DateTime.Now;
         }
-
+        
         public override string ToString()
         {
             string output = $"Имя: {firstName} Фамилия: {lastname} Дата рождения: {dateBirth}";
@@ -41,6 +42,24 @@ namespace MethLab1
         {
             string output = $"Имя: {firstName} Фамилия: {lastname}";
             return output;
+        }
+
+        public override bool Equals(object? obj)
+        {
+            return Equals(obj as Person);
+        }
+
+        public bool Equals(Person? other)
+        {
+            return other is not null &&
+                   firstName == other.firstName &&
+                   lastname == other.lastname &&
+                   dateBirth == other.dateBirth;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(firstName, lastname, dateBirth);
         }
     }
 }

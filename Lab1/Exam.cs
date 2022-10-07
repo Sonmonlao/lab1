@@ -21,7 +21,7 @@ namespace MethLab1
 
         public Exam()
         {
-            Name = "Undefind";
+            Name = "Undefinded";
             grade = 2;
             DateTime = DateTime.Now;
         }
